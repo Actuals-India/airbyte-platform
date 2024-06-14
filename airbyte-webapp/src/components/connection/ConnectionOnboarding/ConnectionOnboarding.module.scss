@@ -1,3 +1,5 @@
+/* stylelint-disable color-no-hex */
+
 @use "scss/colors";
 @use "scss/variables";
 @forward "src/components/ui/Button/Button.module.scss";
@@ -16,10 +18,12 @@
 }
 
 .heading {
-  color: colors.$dark-blue;
+  // color: colors.$dark-blue;
+  color: #5FA5F9;
 
   strong {
-    color: colors.$blue;
+    // color: colors.$blue;
+    color: #2463EB;
   }
 }
 

@@ -9,7 +9,7 @@ import { FeatureItem, IfFeatureEnabled } from "core/services/features";
 import { RoutePaths } from "pages/routePaths";
 
 import styles from "./AirbyteHomeLink.module.scss";
-import AirbyteLogo from "./airbyteLogo.svg?react";
+// import AirbyteLogo from "./airbyteLogo.svg?react";
 
 export const AirbyteHomeLink: React.FC = () => {
   const { formatMessage } = useIntl();
@@ -21,7 +21,7 @@ export const AirbyteHomeLink: React.FC = () => {
         aria-label={formatMessage({ id: "sidebar.homepage" })}
         className={styles.homeLink__link}
       >
-        <AirbyteLogo height={24} className={styles.homeLink__logo} />
+        {/* <AirbyteLogo height={24} className={styles.homeLink__logo} /> */}
       </Link>
       <IfFeatureEnabled feature={FeatureItem.EnterpriseBranding}>
         <BrandingBadge product="enterprise" />

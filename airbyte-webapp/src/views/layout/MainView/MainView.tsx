@@ -9,7 +9,7 @@ import { DefaultErrorBoundary } from "core/errors";
 import { useGetConnectorsOutOfDate } from "hooks/services/useConnector";
 
 import styles from "./MainView.module.scss";
-import { HelpDropdown } from "../SideBar/components/HelpDropdown";
+// import { HelpDropdown } from "../SideBar/components/HelpDropdown";
 import { SideBar } from "../SideBar/SideBar";
 
 const MainView: React.FC<React.PropsWithChildren> = (props) => {
@@ -19,7 +19,7 @@ const MainView: React.FC<React.PropsWithChildren> = (props) => {
     <FlexContainer className={classNames(styles.mainViewContainer)} gap="none">
       <SideBar
         workspaceFetcher={useListWorkspacesInfinite}
-        bottomSlot={<HelpDropdown />}
+        // bottomSlot={<HelpDropdown />}
         settingHighlight={hasNewVersions}
       />
       <div className={styles.content}>

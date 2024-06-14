@@ -1,3 +1,5 @@
+/* stylelint-disable color-no-hex */
+
 @use "scss/colors";
 @use "scss/variables";
 
@@ -135,7 +137,8 @@
   }
 
   &.typePrimary {
-    background-color: colors.$blue-400;
+    // background-color: colors.$blue-400;
+    background-color: #2463EB;
     color: colors.$white;
 
     &:hover {

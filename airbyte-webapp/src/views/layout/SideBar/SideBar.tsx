@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { AdminWorkspaceWarning } from "components/ui/AdminWorkspaceWarning";
 import { FlexContainer } from "components/ui/Flex";
 import { Icon } from "components/ui/Icon";
-import { ThemeToggle } from "components/ui/ThemeToggle";
+// import { ThemeToggle } from "components/ui/ThemeToggle";
 import { WorkspacesPicker } from "components/workspace/WorkspacesPicker";
 import type { WorkspaceFetcher } from "components/workspace/WorkspacesPickerList";
 
@@ -86,7 +86,7 @@ export const SideBar: React.FC<PropsWithChildren<SideBarProps>> = ({
         </MenuContent>
         <MenuContent>
           {bottomSlot}
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
           {logout && user && (
             <NavDropdown
               buttonTestId="sidebar.userDropdown"

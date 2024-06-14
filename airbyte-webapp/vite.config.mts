@@ -100,7 +100,7 @@ export default defineConfig(() => {
     },
     server: {
       host: true,
-      port: Number(process.env.PORT) || 3000,
+      port: Number(process.env.PORT) || 3001,
       strictPort: true,
       headers: {
         "Content-Security-Policy": "script-src * 'unsafe-inline'; worker-src 'self' blob:;",
