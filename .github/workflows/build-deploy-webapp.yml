@@ -58,17 +58,21 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: "adopt"
-          java-version: "11"
+          java-version: "21"
 
       # - name: Install dependencies
       #   run: |
       #     cd airbyte-webapp
       #     npm install
 
+      # Ensure gradlew is executable
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Build gradle
         run: |
           cd airbyte-webapp
-          ./gradlew :airbyte-webapp:assemble
+          gradle :airbyte-webapp:assemble
 
       # - run: |
       #     cd airbyte-webapp
@@ -81,7 +85,10 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           # Build a docker container and push it to ECR
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          # Tag the existing image with the ECR repository URI and the image tag
+          docker tag airbyte/webapp:dev $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          # Push the tagged image to the ECR repository
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "ECR_REGISTRY : ${ECR_REGISTRY}"
           echo "image-registry=$ECR_REGISTRY" >> $GITHUB_OUTPUT
