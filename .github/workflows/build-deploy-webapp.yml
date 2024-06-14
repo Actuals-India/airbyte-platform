@@ -72,7 +72,7 @@ jobs:
       - name: Build gradle
         run: |
           cd airbyte-webapp
-          ./gradlew :airbyte-webapp:assemble
+          gradle :airbyte-webapp:assemble
 
       # - run: |
       #     cd airbyte-webapp
