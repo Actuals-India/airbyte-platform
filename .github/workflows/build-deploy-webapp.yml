@@ -86,6 +86,7 @@ jobs:
         run: |
           # Build a docker container and push it to ECR
           # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker tag airbyte/webapp:dev 321036660250.dkr.ecr.ap-southeast-1.amazonaws.com/airbyte
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "ECR_REGISTRY : ${ECR_REGISTRY}"
           echo "image-registry=$ECR_REGISTRY" >> $GITHUB_OUTPUT
