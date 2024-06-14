@@ -70,6 +70,10 @@ jobs:
           cd airbyte-webapp
           ./gradlew :airbyte-webapp:assemble
 
+      # Ensure gradlew is executable
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       # - run: |
       #     cd airbyte-webapp
       #     npm run build --if-present
