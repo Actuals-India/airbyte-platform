@@ -1,4 +1,5 @@
 name: Deploy
+
 on:
   push:
     branches:
@@ -6,19 +7,20 @@ on:
   workflow_dispatch:
     inputs:
       target_env:
-        description: 'dev'
+        description: "dev"
         required: true
       target_image_name:
-        description: 'airbyte/webapp:dev'
+        description: "airbyte/webapp:dev"
         required: true
       target_image_version:
-        description: '2fe49dfe4641'
+        description: "2fe49dfe4641"
         required: true
 
 env:
   AWS_REGION: ap-southeast-1
   ECR_REPOSITORY: airbyte
-  AWS_ACCOUNT_ID: '321036660250'
+  AWS_ACCOUNT_ID: "321036660250"
+
 jobs:
   build-image:
     name: Build and Push Docker image
@@ -47,7 +49,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.11.0'
+          node-version: "20.11.0"
 
       - name: Setup Docker
         uses: docker/setup-buildx-action@v1
@@ -55,28 +57,30 @@ jobs:
       - name: Setup Gradle
         uses: actions/setup-java@v2
         with:
-          distribution: 'adopt'
-          java-version: '11'
+          distribution: "adopt"
+          java-version: "11"
 
       - name: Install dependencies
         run: |
           cd airbyte-webapp
           npm install
 
-       - name: Build gradle
+      - name: Build gradle
         run: |
           cd airbyte-webapp
           ./gradlew :airbyte-webapp:assemble
 
-      - run: npm run build --if-present
+      - run: |
+          cd airbyte-webapp
+          npm run build --if-present
 
-      - name: Build, tag and push 
+      - name: Build, tag and push
         id: push-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          # Build a docker container and push it to ECR 
+          # Build a docker container and push it to ECR
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "ECR_REGISTRY : ${ECR_REGISTRY}"
