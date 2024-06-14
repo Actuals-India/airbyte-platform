@@ -60,19 +60,19 @@ jobs:
           distribution: "adopt"
           java-version: "11"
 
-      - name: Install dependencies
-        run: |
-          cd airbyte-webapp
-          npm install
+      # - name: Install dependencies
+      #   run: |
+      #     cd airbyte-webapp
+      #     npm install
 
       - name: Build gradle
         run: |
           cd airbyte-webapp
           ./gradlew :airbyte-webapp:assemble
 
-      - run: |
-          cd airbyte-webapp
-          npm run build --if-present
+      # - run: |
+      #     cd airbyte-webapp
+      #     npm run build --if-present
 
       - name: Build, tag and push
         id: push-image
