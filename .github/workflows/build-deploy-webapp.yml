@@ -32,6 +32,13 @@ jobs:
     environment: dev
 
     steps:
+      - name: Send Slack Notification Start(APP-BE)
+        uses: act10ns/slack@v2
+        with:
+          status: Build and Push Docker image
+          channel: '#actuals-infra'
+          message: Starting to build and push docker image
+        if: always()
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -94,6 +101,14 @@ jobs:
           echo "image-registry=$ECR_REGISTRY" >> $GITHUB_OUTPUT
           echo "image-name=$ECR_REPOSITORY" >> $GITHUB_OUTPUT
           echo "image-tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Send Slack Notification Complete(APP-BE)
+        uses: act10ns/slack@v2
+        with:
+          channel: '#actuals-infra'
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: always()
   deploy:
     needs: build-image
     runs-on: ubuntu-latest
