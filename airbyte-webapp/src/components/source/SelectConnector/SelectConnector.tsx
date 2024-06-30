@@ -75,8 +75,8 @@ const SelectConnectorSupportLevel: React.FC<SelectConnectorProps> = ({
       trackSelectConnector(definition.sourceDefinitionId, definition.name);
       onSelectConnectorDefinition(definition.sourceDefinitionId);
     } else {
-      trackSelectConnector(definition.destinationDefinitionId, definition.name);
-      onSelectConnectorDefinition(definition.destinationDefinitionId);
+      // trackSelectConnector(definition.destinationDefinitionId, definition.name);
+      // onSelectConnectorDefinition(definition.destinationDefinitionId);
     }
   };
 
@@ -95,13 +95,13 @@ const SelectConnectorSupportLevel: React.FC<SelectConnectorProps> = ({
       size: "sm",
     });
 
-  const filteredSearchResults = useMemo(
-    () =>
-      connectorDefinitions
-        .filter((definition) => definition.supportLevel && selectedSupportLevels.includes(definition.supportLevel))
-        .filter((definition) => definition.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())),
-    [searchTerm, connectorDefinitions, selectedSupportLevels]
-  );
+  const filteredSearchResults = useMemo(() => {
+    if (connectorType === "destination")
+      return connectorDefinitions.filter((definition) => definition.name.toLowerCase().includes("postgres"));
+    return connectorDefinitions
+      .filter((definition) => definition.supportLevel && selectedSupportLevels.includes(definition.supportLevel))
+      .filter((definition) => definition.name.toLowerCase().includes(searchTerm.toLocaleLowerCase()));
+  }, [searchTerm, connectorDefinitions, selectedSupportLevels]);
 
   const allSearchResults = useMemo(
     () =>

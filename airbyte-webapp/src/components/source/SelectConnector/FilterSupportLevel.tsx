@@ -37,38 +37,40 @@ export const FilterSupportLevel: React.FC<FilterSupportLevelProps> = ({
   }, [selectedSupportLevels, availableSupportLevels]);
 
   return (
-    <FlexContainer gap="lg" alignItems="center">
-      <Text>
-        <FormattedMessage id="connector.filterBy" />
-      </Text>
-      {availableSupportLevels.flatMap((level, index) => {
-        const id = `filter-support-level-${level}`;
-        const isChecked = selectedSupportLevels.includes(level);
-        return [
-          // separator inbetween each filter
-          ...(index !== 0
-            ? [
-                <Text key={`${id}-separator`} color="grey300">
-                  |
-                </Text>,
-              ]
-            : []),
-          // rule doesn't understand SupportLevelBadge renders text
-          // eslint-disable-next-line jsx-a11y/label-has-associated-control
-          <label htmlFor={id} className={styles.checkboxLabel} key={id}>
-            <FlexContainer alignItems="center" gap="sm">
-              <CheckBox
-                checkboxSize="sm"
-                checked={isChecked}
-                disabled={isChecked && numberOfVisiblySelectedSupportLevels <= 1}
-                onChange={() => handleChange(level, !isChecked)}
-                id={id}
-              />
-              <SupportLevelBadge supportLevel={level} custom={level === SupportLevel.none} />
-            </FlexContainer>
-          </label>,
-        ];
-      })}
-    </FlexContainer>
+    null && (
+      <FlexContainer gap="lg" alignItems="center">
+        <Text>
+          <FormattedMessage id="connector.filterBy" />
+        </Text>
+        {availableSupportLevels.flatMap((level, index) => {
+          const id = `filter-support-level-${level}`;
+          const isChecked = selectedSupportLevels.includes(level);
+          return [
+            // separator inbetween each filter
+            ...(index !== 0
+              ? [
+                  <Text key={`${id}-separator`} color="grey300">
+                    |
+                  </Text>,
+                ]
+              : []),
+            // rule doesn't understand SupportLevelBadge renders text
+            // eslint-disable-next-line jsx-a11y/label-has-associated-control
+            <label htmlFor={id} className={styles.checkboxLabel} key={id}>
+              <FlexContainer alignItems="center" gap="sm">
+                <CheckBox
+                  checkboxSize="sm"
+                  checked={isChecked}
+                  disabled={isChecked && numberOfVisiblySelectedSupportLevels <= 1}
+                  onChange={() => handleChange(level, !isChecked)}
+                  id={id}
+                />
+                <SupportLevelBadge supportLevel={level} custom={level === SupportLevel.none} />
+              </FlexContainer>
+            </label>,
+          ];
+        })}
+      </FlexContainer>
+    )
   );
 };

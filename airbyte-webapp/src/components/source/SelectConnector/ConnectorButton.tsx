@@ -14,12 +14,17 @@ interface ConnectorButtonProps<T extends ConnectorDefinition> {
 }
 
 export const ConnectorButton = <T extends ConnectorDefinition>({ definition, onClick }: ConnectorButtonProps<T>) => {
+  let defName = definition.name;
+  console.log(defName);
+  if (definition.name === "Postgres") {
+    defName += " (Auto-configured destination used by Actuals)";
+  }
   return (
     <button className={styles.button} onClick={() => onClick(definition)}>
       <ConnectorIcon icon={definition.icon} className={styles.icon} />
 
       <Text size="lg" as="span" className={styles.text}>
-        {definition.name}
+        {defName}
       </Text>
 
       <span className={styles.supportLevel}>

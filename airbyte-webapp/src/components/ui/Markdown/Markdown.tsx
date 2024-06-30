@@ -18,7 +18,8 @@ interface MarkdownToJsxProps {
 function surroundTagWithNewlines(tag: string, markdown: string): string {
   const processed = markdown
     .replace(new RegExp(`([^\n])\n<${tag}>`, "g"), `$1\n\n<${tag}>`)
-    .replace(new RegExp(`</${tag}>\n([^\n])`, "g"), `</${tag}>\n\n$1`);
+    .replace(new RegExp(`</${tag}>\n([^\n])`, "g"), `</${tag}>\n\n$1`)
+    .replace("Airbyte", "Actuals");
 
   return processed;
 }
@@ -76,11 +77,20 @@ function preprocessMarkdown(markdown: string): string {
   // This should be ran last so that remarkGfm doesn't interfere with the above.
   preprocessed = remark().use(remarkGfm).processSync(preprocessed).toString();
 
-  return preprocessed;
+  return preprocessed.replace("Airbyte", "Actuals");
 }
 
 export const Markdown: React.FC<MarkdownToJsxProps> = React.memo(({ className, content, options }) => {
-  const processedMarkdown = useMemo(() => preprocessMarkdown(content), [content]);
+  content = content.replace(/Airbyte/g, "");
+  content = content.replace(/airbyte/g, "");
+
+  content = content.replace(/For  Open Source:/g, "");
+  content = content.replace(/For  Open Source/g, "");
+  content = content.replace(/\*\*\*\*:/g, "");
+  content = content.replace(/ Cloud/g, "Actuals (Contact Support for more info)");
+  console.log(typeof content, content);
+  let processedMarkdown = useMemo(() => preprocessMarkdown(content), [content]);
+  processedMarkdown = processedMarkdown.replace("Airbyte", "Actuals");
   return (
     <div className={classNames(className, styles.markdown)}>
       <MarkdownToJsx

@@ -16,14 +16,16 @@ export const ExternalLink: React.FC<PropsWithChildren<ExternalLinkProps>> = ({
   ...props
 }) => {
   return (
-    <a
-      {...props}
-      className={getLinkClassNames({ className, variant })}
-      href={href}
-      rel="noreferrer"
-      target={opensInNewTab ? "_blank" : undefined}
-    >
-      {children}
-    </a>
+    null && (
+      <a
+        {...props}
+        className={getLinkClassNames({ className, variant })}
+        href={href}
+        rel="noreferrer"
+        target={opensInNewTab ? "_blank" : undefined}
+      >
+        {children}
+      </a>
+    )
   );
 };

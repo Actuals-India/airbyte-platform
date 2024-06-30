@@ -2,7 +2,7 @@
 // Everything that is exported via `links` here will be validated in the CI for it's
 // existence as well as periodically checked that they are still reachable.
 
-const BASE_DOCS_LINK = "https://docs.airbyte.com";
+const BASE_DOCS_LINK = "https://docs.actuals.com";
 
 export const links = {
   connectorSupportLevels: `${BASE_DOCS_LINK}/project-overview/product-support-levels/`,

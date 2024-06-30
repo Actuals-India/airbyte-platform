@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { Heading } from "components/ui/Heading";
@@ -13,7 +13,7 @@ import { useCurrentWorkspace, useSourceDefinitionList, useDestinationDefinitionL
 import { DestinationDefinitionRead, SourceDefinitionRead } from "core/api/types/AirbyteClient";
 import { useIntent } from "core/utils/rbac";
 import { useExperiment } from "hooks/services/Experiment";
-import { ConnectionRoutePaths, DestinationPaths, RoutePaths } from "pages/routePaths";
+import { ConnectionRoutePaths, RoutePaths } from "pages/routePaths";
 
 import { AirbyteIllustration, HighlightIndex } from "./AirbyteIllustration";
 import styles from "./ConnectionOnboarding.module.scss";
@@ -32,9 +32,9 @@ const DEFAULT_SOURCES = [
 ];
 
 const DEFAULT_DESTINATIONS = [
+  ConnectorIds.Destinations.Postgres,
   ConnectorIds.Destinations.BigQuery,
   ConnectorIds.Destinations.Snowflake,
-  ConnectorIds.Destinations.Postgres,
 ];
 
 interface ConnectorSpecificationMap {
@@ -87,7 +87,7 @@ export const ConnectionOnboarding: React.FC<ConnectionOnboardingProps> = () => {
   const destinationIds = useExperiment("connection.onboarding.destinations", "").split(",");
 
   const createConnectionPath = `/${RoutePaths.Workspaces}/${workspaceId}/${RoutePaths.Connections}/${ConnectionRoutePaths.ConnectionNew}`;
-  const createDestinationBasePath = `/${RoutePaths.Workspaces}/${workspaceId}/${RoutePaths.Destination}/${DestinationPaths.SelectDestinationNew}`;
+  // const createDestinationBasePath = `/${RoutePaths.Workspaces}/${workspaceId}/${RoutePaths.Destination}/${DestinationPaths.SelectDestinationNew}`;
 
   const createSourcePath = (sourceDefinitionId?: string) => {
     const sourceDefinitionPath = sourceDefinitionId ? `&${SOURCE_DEFINITION_PARAM}=${sourceDefinitionId}` : "";
@@ -117,10 +117,15 @@ export const ConnectionOnboarding: React.FC<ConnectionOnboardingProps> = () => {
     { count: roundConnectorCount(sourceDefinitions) }
   );
 
-  const moreDestinationsTooltip = formatMessage(
-    { id: "connection.onboarding.moreDestinations" },
-    { count: roundConnectorCount(destinationDefinitions) }
-  );
+  // const moreDestinationsTooltip = formatMessage(
+  //   { id: "connection.onboarding.moreDestinations" },
+  //   { count: roundConnectorCount(destinationDefinitions) }
+  // );
+  // setHighlightedDestination(3);
+
+  useEffect(() => {
+    setHighlightedDestination(0);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -142,6 +147,7 @@ export const ConnectionOnboarding: React.FC<ConnectionOnboardingProps> = () => {
           </Text>
           {sources.map((source, index) => {
             const tooltipText = formatMessage({ id: "connection.onboarding.addSource" }, { source: source?.name });
+
             return (
               <ConnectionOnboardingConnectorLink
                 key={source?.sourceDefinitionId}
@@ -162,14 +168,14 @@ export const ConnectionOnboarding: React.FC<ConnectionOnboardingProps> = () => {
           <Tooltip
             placement="right"
             control={
-              <ConnectionOnboardingConnectorLink
-                testId="onboardingSource-more"
-                to={createSourcePath()}
-                tooltipText={moreSourcesTooltip}
-                onMouseEnter={() => setHighlightedSource(3)}
-              >
-                <Icon type="plus" className={styles.moreIcon} />
-              </ConnectionOnboardingConnectorLink>
+              // <ConnectionOnboardingConnectorLink
+              //   testId="onboardingSource-more"
+              //   to={createSourcePath()}
+              //   tooltipText={moreSourcesTooltip}
+              //   onMouseEnter={() => setHighlightedSource(3)}
+              // >
+              <Icon type="plus" className={styles.moreIcon} />
+              // </ConnectionOnboardingConnectorLink>
             }
           >
             {moreSourcesTooltip}
@@ -194,36 +200,35 @@ export const ConnectionOnboarding: React.FC<ConnectionOnboardingProps> = () => {
               <FormattedMessage id="connection.onboarding.destinationsDescription" />
             </Tooltip>
           </Text>
-          {destinations.map((destination, index) => {
-            const tooltipText = formatMessage(
-              { id: "connection.onboarding.addDestination" },
-              { destination: destination?.name }
-            );
+          {destinations.map((destination) => {
+            // const tooltipText = formatMessage(
+            //   { id: "connection.onboarding.addDestination" },
+            //   { destination: destination?.name }
+            // );
             return (
-              <ConnectionOnboardingConnectorLink
-                key={destination?.destinationDefinitionId}
-                testId={`onboardingDestination-${index}`}
-                connector={destination}
-                connectorType="destination"
-                to={`${createDestinationBasePath}/${destination.destinationDefinitionId}`}
-                tooltipText={tooltipText}
-                onMouseEnter={() => setHighlightedDestination(index as HighlightIndex)}
-              >
-                <div className={styles.connectorIcon}>
-                  <SvgIcon src={destination?.icon} />
-                </div>
-              </ConnectionOnboardingConnectorLink>
+              // <ConnectionOnboardingConnectorLink
+              //   key={destination?.destinationDefinitionId}
+              //   testId={`onboardingDestination-${index}`}
+              //   connector={destination}
+              //   connectorType="destination"
+              //   to={`${createDestinationBasePath}/${destination.destinationDefinitionId}`}
+              //   tooltipText={tooltipText}
+              //   onMouseEnter={() => setHighlightedDestination(index as HighlightIndex)}
+              // >
+              <div className={styles.connectorIcon1}>
+                <SvgIcon src={destination?.icon} />
+              </div>
+              // </ConnectionOnboardingConnectorLink>
             );
           })}
-
-          <ConnectionOnboardingConnectorLink
+          {/* <ConnectionOnboardingConnectorLink
             testId="onboardingDestination-more"
             to={createDestinationBasePath}
             tooltipText={moreDestinationsTooltip}
             onMouseEnter={() => setHighlightedDestination(3)}
-          >
-            <Icon type="plus" className={styles.moreIcon} />
-          </ConnectionOnboardingConnectorLink>
+          > */}
+          <Icon type="plus" className={styles.moreIcon1} />
+          {/* </ConnectionOnboardingConnectorLink> */}
         </div>
       </div>
       <div className={styles.footer}>

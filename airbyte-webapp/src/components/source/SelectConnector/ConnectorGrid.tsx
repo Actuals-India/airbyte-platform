@@ -35,7 +35,7 @@ export const ConnectorGrid = <T extends ConnectorDefinition>({
           <Text size="xl" align="center">
             <FormattedMessage id="connector.noSearchResults" />
           </Text>
-          {searchResultsHiddenByFilters > 0 && (
+          {searchResultsHiddenByFilters > 1000 && (
             <Message
               text={
                 <FormattedMessage
@@ -62,7 +62,7 @@ export const ConnectorGrid = <T extends ConnectorDefinition>({
         {showConnectorBuilderButton && <BuilderConnectorButton />}
         <RequestNewConnectorButton onClick={onOpenRequestConnectorModal} />
       </div>
-      {connectorDefinitions.length > 0 && searchResultsHiddenByFilters > 0 && (
+      {connectorDefinitions.length > 1000 && searchResultsHiddenByFilters > 0 && (
         <Box pt="2xl">
           <Message
             text={

@@ -29,7 +29,7 @@ interface SideBarProps {
 export const SideBar: React.FC<PropsWithChildren<SideBarProps>> = ({
   workspaceFetcher,
   bottomSlot,
-  settingHighlight,
+  // settingHighlight,
 }) => {
   const { logout, user } = useAuthService();
   const { formatMessage } = useIntl();
@@ -77,16 +77,15 @@ export const SideBar: React.FC<PropsWithChildren<SideBarProps>> = ({
               testId="creditsButton"
             />
           </IfFeatureEnabled>
-          <NavItem
+          {/* <NavItem
             label={<FormattedMessage id="sidebar.settings" />}
             icon="gear"
             to={RoutePaths.Settings}
             withNotification={settingHighlight}
-          />
+          /> */}
         </MenuContent>
         <MenuContent>
           {bottomSlot}
-          {/* <ThemeToggle /> */}
           {logout && user && (
             <NavDropdown
               buttonTestId="sidebar.userDropdown"

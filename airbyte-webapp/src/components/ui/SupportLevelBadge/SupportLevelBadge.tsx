@@ -16,6 +16,9 @@ export const SupportLevelBadge: React.FC<SupportLevelBadgeProps> = ({
   custom = false,
   tooltip = true,
 }) => {
+  if (1 > 0) {
+    return null;
+  }
   if (!supportLevel || (!custom && supportLevel === SupportLevel.none)) {
     return null;
   }

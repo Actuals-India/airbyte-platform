@@ -8,10 +8,10 @@ import { Message } from "components/ui/Message";
 import { SupportLevel } from "core/api/types/AirbyteClient";
 import { links } from "core/utils/links";
 
-export const WarningMessage: React.FC<{ supportLevel?: SupportLevel }> = ({ supportLevel }) => {
-  if (supportLevel !== "community") {
-    return null;
-  }
+export const WarningMessage: React.FC<{ supportLevel?: SupportLevel }> = ({}) => {
+  // if (supportLevel !== "community") {
+  return null;
+  // }
 
   return (
     <Box>
