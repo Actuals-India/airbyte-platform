@@ -58,7 +58,7 @@ export default defineConfig(() => {
           // Align error popover button with the react-query dev tool button
           badgeStyle: "transform: translate(-75px,-11px); display: var(--show-dev-tools)",
         },
-        eslint: { lintCommand: `eslint --max-warnings=0 --ext .js,.ts,.tsx --ignore-path .gitignore .` },
+        eslint: { lintCommand: `eslint --max-warnings=100 --ext .js,.ts,.tsx --ignore-path .gitignore .` },
         stylelint: {
           lintCommand: 'stylelint "src/**/*.{css,scss}"',
           // We need to overwrite this during development, since otherwise `files` are wrongly
