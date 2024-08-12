@@ -68,7 +68,7 @@ export const WorkspacesPage: React.FC = () => {
       <HeadTitle titles={[{ id: "workspaces.title" }]} />
       <Box px="lg" className={styles.brandingHeader}>
         <FlexContainer justifyContent="space-between" alignItems="center">
-          <AirbyteLogo width={110} />
+          {/* <AirbyteLogo width={110} /> */}
           {logout && (
             <Button variant="clear" onClick={() => handleLogout()} isLoading={isLogoutLoading}>
               <FormattedMessage id="settings.accountSettings.logoutText" />

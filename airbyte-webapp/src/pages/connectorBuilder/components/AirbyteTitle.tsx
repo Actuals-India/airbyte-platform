@@ -11,7 +11,7 @@ export const AirbyteTitle = ({ title }: { title: ReactNode }) => {
   return (
     <>
       <FlexContainer direction="column" gap="md" alignItems="center" className={styles.titleContainer}>
-        <AirbyteLogo />
+        {/* <AirbyteLogo /> */}
         <Heading as="h1" size="lg" className={styles.title}>
           <FormattedMessage id="connectorBuilder.title" />
         </Heading>

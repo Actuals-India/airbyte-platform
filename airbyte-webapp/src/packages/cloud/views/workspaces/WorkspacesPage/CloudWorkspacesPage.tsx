@@ -63,7 +63,7 @@ export const CloudWorkspacesPageInner: React.FC = () => {
   return (
     <div className={styles.cloudWorkspacesPage__container}>
       <FlexContainer justifyContent="space-between">
-        <AirbyteLogo className={styles.cloudWorkspacesPage__logo} />
+        {/* <AirbyteLogo className={styles.cloudWorkspacesPage__logo} /> */}
         {logout && (
           <Button variant="clear" onClick={() => handleLogout()} isLoading={isLogoutLoading}>
             <FormattedMessage id="settings.accountSettings.logoutText" />
