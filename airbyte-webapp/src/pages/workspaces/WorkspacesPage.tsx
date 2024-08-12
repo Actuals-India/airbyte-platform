@@ -3,7 +3,7 @@ import React, { useDeferredValue, useState } from "react";
 import { FormattedMessage } from "react-intl";
 
 import { HeadTitle } from "components/common/HeadTitle";
-import AirbyteLogo from "components/illustrations/airbyte-logo.svg?react";
+// import AirbyteLogo from "components/illustrations/airbyte-logo.svg?react";
 import { Box } from "components/ui/Box";
 import { Button } from "components/ui/Button";
 import { FlexContainer } from "components/ui/Flex";
